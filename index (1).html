@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f6f4;
+      --ink: #14211c;
+      --accent: #1f6f5c;
+      --accent-soft: #d9ebe5;
+      --chat-bg: #ffffff;
+      --chat-border: #cfdcd6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1a16;
+        --ink: #e6efe9;
+        --accent: #4fb89b;
+        --accent-soft: #1c3029;
+        --chat-bg: #15231e;
+        --chat-border: #2a4037;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 20px 24px 12px;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    header h1 {
+      margin: 0 0 4px;
+      font-size: 1.6rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+    header p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.75;
+    }
+    main {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 24px;
+    }
+    #chat {
+      height: 100%;
+      min-height: 420px;
+      background: var(--chat-bg);
+      border: 1px solid var(--chat-border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    :root {
+      --chat--color-primary: var(--accent);
+      --chat--color-primary-shade-50: var(--accent);
+      --chat--color-primary-shade-100: var(--accent);
+      --chat--color-secondary: var(--accent);
+      --chat--color-white: var(--chat-bg);
+      --chat--color-light: var(--bg);
+      --chat--color-dark: var(--ink);
+      --chat--header-height: 0px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Search Assistant</h1>
+    <p>Ask a question and the assistant searches the web to answer it.</p>
+  </header>
+
+  <main>
+    <div id="chat"></div>
+  </main>
+
+  <script type="module">
+    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+    createChat({
+      // Replace with the Production URL from your n8n Chat Trigger node
+      webhookUrl: "https://siai.app.n8n.cloud/webhook/f2f67a37-3364-4313-86f7-9ab999a07ece/chat",
+      target: "#chat",
+      mode: "embedded",
+      showWelcomeScreen: false,
+      initialMessages: [
+        "Hi! Ask me anything and I will search the web for it."
+      ],
+      i18n: {
+        en: {
+          title: "Search Assistant",
+          subtitle: "",
+          footer: "",
+          getStarted: "New conversation",
+          inputPlaceholder: "Type your question...",
+        },
+      },
+    });
+  </script>
+</body>
+</html>
